@@ -1,61 +1,44 @@
 import { useState } from "react";
+import SearchBar from "./SearchBar"
+import Usercard from "./Usercard"
 
-function TaskItem({task, index, onDelete, onToggle}){
-    return(
-        <li> 
-            <input type="checkbox"
-            checked={task.completed}
-            onChange={() => onToggle(index)}
-            />
-            {task.text}
-            <button onClick={() => onDelete(index)}>delete</button>
-        </li>
-    )
-}
-    function App(){
-    const [tasks, setTasks] = useState([])
-    const [input, setInput] = useState('') 
+function App(){
+    const[Loading, setLoading] = useState(false)
+    const[error, seterror] = useState(null)
 
-    function addTasks(){ 
-        if(input ==='') return
-        setTasks([...tasks, {text: input, completed: false}
-        ])
-        setInput('')
+    const[username, setUsername] = useState('')
+    const[userData, setuserData] = useState(null)
+
+  async function SearchUser(){
+        if(username === '') return
+        setLoading(true)
+        seterror(null)
+
+        const response = await fetch(`https://api.github.com/users/${username}`)
+        const data = await response.json()
+
+        if(data.message == "Not Found"){
+        seterror("User Not Found. Check username and try again." )
+        setuserData(null)
+    } else{
+        setuserData(data)
+        setUsername('')
     }
-    function deleteTask(index){
-        setTasks(tasks.filter((_, i) => i !== index))
-    }
-    function togggleTask(index){
-        setTasks(
-            tasks.map((task, i) => {
-              if(i === index){
-                return {
-                    ...task,
-                    completed:!task.completed
-                }
-              }  
-              return task 
-            })
-        )
+    setLoading(false)
     }
     return(
         <div>
-            <h1>My Todo list</h1>
-            <p>{tasks.length} tasks remaining</p>
-            <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && addTasks()}
-            placeholder="Enter a task"
+            <h1>Github user Search</h1>
+            <SearchBar
+            username ={username}
+            setUsername={setUsername}
+            onSearch ={SearchUser}
             />
-            <button onClick={addTasks}>Add task</button>
-            <ul>
-                {tasks.map((tasks, index) => (
-                    <TaskItem key ={index} task ={tasks} index ={index} onDelete={deleteTask} onToggle = {togggleTask}/>
-                ))}
-            </ul>
+            {Loading && <p>Searching...</p>}
+            {error && <p>{error}</p>}
+            <Usercard user ={userData}/>
         </div>
-    );
-}
+    )
 
+}
 export default App; 
