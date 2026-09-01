@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
 import SearchBar from "./SearchBar";
 
 function SearchPage() {
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+  const { setUserData, setLoading, setError } = useContext(UserContext);
 
   async function SearchUser() {
     if (username === '') return;
+    setLoading(true);
+    setError(null);
+    
     const response = await fetch(`https://api.github.com/users/${username}`);
     const data = await response.json();
     
     if (data.message === "Not Found") {
-      alert("User Not Found. Check username and try again.");
+      setError("User Not Found. Check username and try again.");
+      setUserData(null);
     } else {
-      navigate(`/user/${username}`, { state: { userData: data } });
+      setUserData(data);
+      setUsername('');
+      navigate(`/user/${username}`);
     }
+    setLoading(false);
   }
 
   return (
@@ -30,4 +39,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default SearchPage; 

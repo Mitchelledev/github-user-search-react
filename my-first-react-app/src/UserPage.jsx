@@ -1,21 +1,20 @@
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "./UserContext";
 import Usercard from "./Usercard";
 
 function UserPage() {
-  const { username } = useParams();
-  const location = useLocation();
-  const userData = location.state?.userData;
+  const { userData, loading, error } = useContext(UserContext);
 
   return (
     <div>
       <Link to="/" className="text-blue-600 hover:underline">← Back to Search</Link>
-      {userData ? (
-        <Usercard user={userData} />
-      ) : (
-        <p>No user data found</p>
-      )}
+      
+      {loading && <p>Searching...</p>}
+      {error && <p>{error}</p>}
+      {userData && <Usercard user={userData} />}
     </div>
   );
 }
 
-export default UserPage;
+export default UserPage; 
