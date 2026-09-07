@@ -1,18 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UserProvider } from "./UserContext";
-import SearchPage from "./SearchPage";
-import UserPage from "./UserPage"; 
-
+import { AuthProvider } from "./context/AuthContext"; 
+ 
 function App(){
   return (
-    <UserProvider>
+    <AuthProvider>
     <BrowserRouter>
     <Routes>
-     <Route path="/" element={<SearchPage/>} />
-     <Route path="/user/:username" element={<UserPage/>} /> 
+     
     </Routes>
     </BrowserRouter> 
-    </UserProvider>
+    </AuthProvider>
   )
 }
 export default App; 
