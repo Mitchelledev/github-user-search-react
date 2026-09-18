@@ -83,3 +83,4 @@ export function jobProvider({children}) {
     </jobContext.Provider>
   );
 }
+export default jobContext;
