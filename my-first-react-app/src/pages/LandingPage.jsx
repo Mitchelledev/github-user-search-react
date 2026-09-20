@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthContext";
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) { 
+    if (user) {
       navigate("/home");
     }
   }, [user, navigate]);
@@ -71,4 +71,4 @@ import { AuthContext } from "../context/AuthContext";
 
 
 
-export default LandingPage;
+export default LandingPage; 
