@@ -16,7 +16,7 @@ function SignInPage(){
         }
     }
     return (
-        <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center px-6">
+    <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center px-6">
     <div className="bg-white rounded-lg border border-slate-200 p-8 w-full max-w-sm">
       {/* Header */}
       <h2 className="text-2xl font-semibold text-slate-900 mb-2">Welcome back</h2>

@@ -3,26 +3,26 @@ import { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext()
 
 export function AuthProvider({children}) {
-  const [user, setuser] = useState(null);
-  const [loading, setloading] = useState(false);
-  const [error, seterror] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const saveduser = localStorage.getItem("user");
     if(saveduser) {
-      setuser(JSON.parse(saveduser));
+      setUser(JSON.parse(saveduser));
     }
   },[]);
 
   function signup(email, password, isEmployer) {
-    setloading(true);
-    seterror(null);
+    setLoading(true);
+    setError(null);
 
-   const users = JSON.parse(localStorage.getItem("user") || "[]");
+   const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     if (users.find(u => u.email === email)) {
-      seterror("Email already Exit");
-      setloading(false)
+      setError("Email already Exit");
+      setLoading(false)
       return false;
     }
     const newUser = {email, password, isEmployer};
@@ -30,32 +30,32 @@ export function AuthProvider({children}) {
     localStorage.setItem("users",JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
 
-    setuser(newUser)
-    setloading(false)
+    setUser(newUser)
+    setLoading(false)
     return true;
   }
 
   function login(email, password) {
-    setloading(true)
-    seterror(null);
+    setLoading(true)
+    setError(null);
 
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     const foundUser = users.find(u => u.email === email && u.password === password); 
 
     if(!foundUser) {
-      seterror("invalid email or password");
-      setloading(false)
+      setError("invalid email or password");
+      setLoading(false)
       return false;
     }
     localStorage.setItem("user", JSON.stringify(foundUser));
-    setuser(foundUser)
-    setloading(false)
+    setUser(foundUser)
+    setLoading(false)
     return true;
   }
 
   function logout() {
-    localStorage.remove("user")
-    setuser(null);
+    localStorage.removeItem("user")
+    setUser(null);
   }
 
   return (

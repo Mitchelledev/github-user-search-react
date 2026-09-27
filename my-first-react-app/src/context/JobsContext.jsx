@@ -1,36 +1,36 @@
 import { createContext, useState } from "react";
 
-export const jobContext = createContext();
+export const JobsContext = createContext();
 
-export function jobProvider({children}) {
-  const [jobs, setjobs] = useState([]);
+export function JobsProvider({children}) {
+  const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
 
-  function initializejobs(){
+  function initializeJobs(){
     const mockjobs = [
       {
         id: 1,
         title: "Senior React Developer",
         company: "Techorp.com",
-        level: "mid",
+        level: "Mid",
         location: "Remote",
-        Decription: "we're looking for an experienced React developer to join our growing team",
-        requirement: ["5+ years React", "TypeScript", "State Management"]
+        decription: "we're looking for an experienced React developer to join our growing team",
+        Requirement: ["5+ years React", "TypeScript", "State Management"]
       },
       {
         id: 2,
         title: " product Manager",
-        Company: "Startup.com",
+        company: "Startup.com",
         level: "Senior",
         location: "San francisco",
         description: "lead product strategy for our AI platform.",
         requirement: ["8+ years pm expereince", "Technical background", "Leadership"] 
       },
     ];
-    setjobs(mockjobs);
+    setJobs(mockjobs);
   }
 
-  function getjobs(){
+  function getJobs(){
     return jobs;
   }
   function getjobById(id) {
@@ -38,10 +38,10 @@ export function jobProvider({children}) {
   }
   function searchjobs(query, level) {
     return jobs.filter(job => {
-      const matchQuery = job.title.toLowercase().includes(query.toLowercase()) ||
-                         job.company.toLowercase().includes(query.toLowercase())
-      const matchlevel = level === "All levels" || job.level === level
-      return matchQuery && matchlevel;                   
+      const matchQuery = job.title.toLowerCase().includes(query.toLowerCase()) ||
+                         job.company.toLowerCase().includes(query.toLowerCase())
+      const matchLevel = level === "All Levels" || job.level === level
+      return matchQuery && matchLevel;                   
     });
   }
   function applyTojob(jobId, userEmail) {
@@ -49,38 +49,38 @@ export function jobProvider({children}) {
       id: Math.random(),
       jobId,
       userEmail,
-      appliedAt: new Date().toLocaleDateString()
+      appliedAt: new Date().toLocaleDateString(),
     };
     setApplications([...applications, application])
     return true;
   }
   function getUserApplication(userEmail) {
-    return applications(app => app.userEmail === userEmail)
+    return applications.filter(app => app.userEmail === userEmail)
   }
-  function postjobs(jobData, userEmail) {
-    const newjob = {
+  function postJobs(jobData, userEmail) {
+    const newJob = {
       id: Math.random(),
       ...jobData,
       postedBy: userEmail,
-      postedAt: new Date(). toLocaleDateString,
+      postedAt: new Date().toLocaleDateString(),
     };
-    setjobs([...setjobs, newjob]);
+    setJobs([...jobs, newJob]);
     return true;
   } 
   return(
-    <jobContext.Provider value={{
+    <JobsContext.Provider value={{
        jobs, 
       applications, 
-      initializejobs, 
-      getjobs, 
+      initializeJobs, 
+      getJobs, 
       getjobById, 
       searchjobs, 
       applyTojob, 
       getUserApplication, 
-      postjobs 
+      postJobs 
     }}>
       {children}
-    </jobContext.Provider>
+    </JobsContext.Provider>
   );
 }
-export default jobContext; 
+export default JobsContext; 
