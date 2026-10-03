@@ -13,7 +13,7 @@ function SignUpPage(){
         e.preventDefault()
         const success = signup(email, password, isEmployer);
         if(success) {
-            navigate("/home")
+            navigate("/home"); 
         }
     }
 

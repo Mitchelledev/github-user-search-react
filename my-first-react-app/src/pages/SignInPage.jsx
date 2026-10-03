@@ -12,14 +12,14 @@ function SignInPage(){
         e.preventDefault()
         const success = login (email, password)
         if (success) {
-            navigate("/home")
+            navigate("/home");
         }
     }
     return (
     <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center px-6">
     <div className="bg-white rounded-lg border border-slate-200 p-8 w-full max-w-sm">
       {/* Header */}
-      <h2 className="text-2xl font-semibold text-slate-900 mb-2">Welcome back</h2>
+      <h2 className="text-2xl font-semibold text-slate-900 mb-2">Welcome Back</h2>
 
       {/* Form Container with paragraph - creates spacing between them */}
       <div className="flex flex-col gap-3">
@@ -66,7 +66,7 @@ function SignInPage(){
         {/* Sign In Link */}
         <p className="text-center text-sm text-slate-600">
           Don't have an account?{" "}
-          <Link to="/signin" className="text-blue-600 hover:underline">
+          <Link to="/signup" className="text-blue-600 hover:underline"> 
             Sign up
           </Link>
         </p>

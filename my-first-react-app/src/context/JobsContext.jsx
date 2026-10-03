@@ -15,7 +15,7 @@ export function JobsProvider({children}) {
         level: "Mid",
         location: "Remote",
         decription: "we're looking for an experienced React developer to join our growing team",
-        Requirement: ["5+ years React", "TypeScript", "State Management"]
+        requirement: ["5+ years React", "TypeScript", "State Management"]
       },
       {
         id: 2,
@@ -33,7 +33,7 @@ export function JobsProvider({children}) {
   function getJobs(){
     return jobs;
   }
-  function getjobById(id) {
+  function getJobById(id) {
     return jobs.find(job => job.id === id);
   }
   function searchjobs(query, level) {
@@ -44,7 +44,7 @@ export function JobsProvider({children}) {
       return matchQuery && matchLevel;                   
     });
   }
-  function applyTojob(jobId, userEmail) {
+  function applyToJob(jobId, userEmail) {
     const application = {
       id: Math.random(),
       jobId,
@@ -73,9 +73,9 @@ export function JobsProvider({children}) {
       applications, 
       initializeJobs, 
       getJobs, 
-      getjobById, 
+      getJobById, 
       searchjobs, 
-      applyTojob, 
+      applyToJob, 
       getUserApplication, 
       postJobs 
     }}>
