@@ -41,7 +41,7 @@ function  HomePage() {
   return (
     <div className="min-h-screen w-full bg-slate-50">
       {/* Header */}
-      <header className="border-b border-slate-200 bg-white px-6 py-4">
+      <header className=" sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="text-lg font-semibold text-slate-900">JobBoard</div>
           <div className="flex gap-3">
@@ -104,7 +104,7 @@ function  HomePage() {
           ) : (
             filteredJobs.map((job) => (
               <div
-                key={job.id}
+                key={job.id} 
                 className="bg-white border border-slate-200 rounded-lg p-4 hover:border-slate-300 cursor-pointer"
               >
                 <div className="font-medium text-slate-900 mb-1">{job.title}</div>

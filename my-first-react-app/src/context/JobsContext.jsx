@@ -4,7 +4,7 @@ export const JobsContext = createContext();
 
 export function JobsProvider({children}) {
   const [jobs, setJobs] = useState([]);
-  const [applications, setApplications] = useState([]);
+  const [applications, setApplications] = useState([]); 
 
   function initializeJobs(){
     const mockjobs = [
@@ -39,7 +39,7 @@ export function JobsProvider({children}) {
   function searchjobs(query, level) {
     return jobs.filter(job => {
       const matchQuery = job.title.toLowerCase().includes(query.toLowerCase()) ||
-                         job.company.toLowerCase().includes(query.toLowerCase())
+                         job.company.toLowerCase().includes(query.toLowerCase()) 
       const matchLevel = level === "All Levels" || job.level === level
       return matchQuery && matchLevel;                   
     });
@@ -67,6 +67,11 @@ export function JobsProvider({children}) {
     setJobs([...jobs, newJob]);
     return true;
   } 
+  function deleteApplication(applicationid) {
+    const updateApplications = applications.filter(app => app.id !== applicationid)
+    setApplications(updateApplications); 
+    return true; 
+  }
   return(
     <JobsContext.Provider value={{
        jobs, 
@@ -77,7 +82,8 @@ export function JobsProvider({children}) {
       searchjobs, 
       applyToJob, 
       getUserApplication, 
-      postJobs 
+      postJobs, 
+      deleteApplication 
     }}>
       {children}
     </JobsContext.Provider>

@@ -21,7 +21,7 @@ function SignInPage(){
       {/* Header */}
       <h2 className="text-2xl font-semibold text-slate-900 mb-2">Welcome Back</h2>
 
-      {/* Form Container with paragraph - creates spacing between them */}
+      {/* Form Container with paragraph - creates spacing between them */}      
       <div className="flex flex-col gap-3">
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">

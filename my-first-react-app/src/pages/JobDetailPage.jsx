@@ -11,11 +11,11 @@ function JobDetailPage() {
 
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [applied, setApplied] = useState(false); 
+  const [applied, setApplied] = useState(false);
 
   useEffect(() => {
     if (!user) {
-      navigate("/");
+      navigate("/"); 
       return; 
     }
 
@@ -30,18 +30,18 @@ function JobDetailPage() {
       setApplied(true);
     }
     setLoading(false);
-  }
+  } 
 
    if (!job) {
      return <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center">
-      <p className="text-slate-600">Loading...</p> 
+      <p className="text-slate-600">Loading...</p>
      </div>
    }
 
   return (
   <div className="min-h-screen w-full bg-slate-50">
     {/* Header with navigation */}
-    <header className="border-b border-slate-200 bg-white px-6 py-4">
+    <header className=" sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="text-lg font-semibold text-slate-900">JobBoard</div>
         <div className="flex gap-3">
@@ -103,4 +103,4 @@ function JobDetailPage() {
 );  
 }
 
-export default JobDetailPage;
+export default JobDetailPage; 
