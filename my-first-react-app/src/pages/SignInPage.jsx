@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
 
-function SignInPage(){
+function SignInPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -25,6 +25,7 @@ function SignInPage(){
       <div className="flex flex-col gap-3">
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+
           {/* Email Input */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-slate-90 text-left">Email</label>

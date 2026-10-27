@@ -9,7 +9,7 @@ function JobDetailPage() {
   const { getJobById, applyToJob } = useContext(JobsContext);
   const navigate = useNavigate();
 
-  const [job, setJob] = useState(null);
+  const [job, setjob] = useState(null)
   const [loading, setLoading] = useState(false);
   const [applied, setApplied] = useState(false);
 
@@ -17,11 +17,11 @@ function JobDetailPage() {
     if (!user) {
       navigate("/"); 
       return; 
-    }
+    } 
 
     const foundJob = getJobById(parseInt(id));
-    setJob(foundJob);
-  }, [id, user, navigate]);
+    setjob(foundJob);
+    }, [id, user, navigate]);
 
   function handleApply() {
     setLoading(true);
@@ -29,13 +29,13 @@ function JobDetailPage() {
     if (success) {
       setApplied(true);
     }
-    setLoading(false);
+    setLoading(false); 
   } 
 
    if (!job) {
      return <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center">
-      <p className="text-slate-600">Loading...</p>
-     </div>
+      <p className="text-slate-600">No job found.</p> 
+     </div> 
    }
 
   return (

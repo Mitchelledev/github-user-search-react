@@ -12,6 +12,7 @@ export function JobsProvider({children}) {
         id: 1,
         title: "Senior React Developer",
         company: "Techorp.com",
+        postedBy: "udohchineye30@gmail.com",
         level: "Mid",
         location: "Remote",
         decription: "we're looking for an experienced React developer to join our growing team",
@@ -21,6 +22,7 @@ export function JobsProvider({children}) {
         id: 2,
         title: " product Manager",
         company: "Startup.com",
+        postedBy: "udohchineye30@gmail.com",
         level: "Senior",
         location: "San francisco",
         description: "lead product strategy for our AI platform.",
@@ -49,29 +51,31 @@ export function JobsProvider({children}) {
       id: Math.random(),
       jobId,
       userEmail,
-      appliedAt: new Date().toLocaleDateString(),
+      appliedAt: new Date().toLocaleDateString(), 
     };
     setApplications([...applications, application])
     return true;
   }
+
   function getUserApplication(userEmail) {
     return applications.filter(app => app.userEmail === userEmail)
   }
   function postJobs(jobData, userEmail) {
     const newJob = {
-      id: Math.random(),
+      id: Date.now(),
       ...jobData,
       postedBy: userEmail,
       postedAt: new Date().toLocaleDateString(),
     };
     setJobs([...jobs, newJob]);
-    return true;
+    return true; 
   } 
   function deleteApplication(applicationid) {
     const updateApplications = applications.filter(app => app.id !== applicationid)
     setApplications(updateApplications); 
     return true; 
   }
+  
   return(
     <JobsContext.Provider value={{
        jobs, 

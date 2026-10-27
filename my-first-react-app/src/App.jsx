@@ -7,6 +7,7 @@ import SignInPage from "./pages/SignInPage";
 import HomePage from "./pages/HomePage";
 import JobDetailPage from "./pages/JobDetailPage";
 import MyApplicationPage from "./pages/MyApplicationPage"
+import ProfilePage from "./pages/ProfilePage"
  
 function App(){
   return (
@@ -19,7 +20,8 @@ function App(){
      <Route path="/signin" element={<SignInPage/>} />
      <Route path="/home" element={<HomePage/>} />
      <Route path="/job/:id" element={<JobDetailPage />} />
-     <Route path="/applications" element={<MyApplicationPage/>} /> 
+     <Route path="/applications" element={<MyApplicationPage/>} />
+     <Route path="/Profile" element={<ProfilePage/>} />  
      </Routes>
     </BrowserRouter>
     </JobsProvider>

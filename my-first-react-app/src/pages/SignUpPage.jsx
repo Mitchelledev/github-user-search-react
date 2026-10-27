@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import {AuthContext} from "../context/AuthContext"
 
 function SignUpPage(){
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isEmployer, setIsEmployer] = useState(false);
@@ -11,7 +12,7 @@ function SignUpPage(){
 
     function handleSubmit(e) {
         e.preventDefault()
-        const success = signup(email, password, isEmployer);
+        const success = signup(email, password, isEmployer, name);
         if(success) {
             navigate("/home"); 
         }
@@ -28,6 +29,20 @@ function SignUpPage(){
       <div className="flex flex-col gap-3">
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+
+          {/* Name input */}
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-slate-90 text-left">Username</label>
+            <input 
+             type="name"
+             placeholder="Enter name"
+             value={name}
+             onChange={(e) =>setName(e.target.value)}
+             required
+             className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" 
+             />
+          </div>
+
           {/* Email Input */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-slate-90 text-left">Email</label>

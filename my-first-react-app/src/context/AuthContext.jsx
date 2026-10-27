@@ -14,18 +14,18 @@ export function AuthProvider({children}) {
     }
   },[]);
 
-  function signup(email, password, isEmployer) {
+  function signup(email, password, isEmployer, name) {
     setLoading(true);
     setError(null);
 
-   const users = JSON.parse(localStorage.getItem("users") || "[]");
+   const users = JSON.parse(localStorage.getItem("users")) || [];
 
     if (users.find(u => u.email === email)) {
       setError("Email already Exit");
       setLoading(false)
       return false;
     }
-    const newUser = {email, password, isEmployer};
+    const newUser = {email, password, isEmployer, name};
     users.push(newUser);
     localStorage.setItem("users",JSON.stringify(users));
     localStorage.setItem("user", JSON.stringify(user));
@@ -35,11 +35,11 @@ export function AuthProvider({children}) {
     return true;
   }
 
-  function login(email, password) {
+  function login(email, password, ) {
     setLoading(true)
     setError(null);
 
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const users = JSON.parse(localStorage.getItem("users")) || [];
     const foundUser = users.find(u => u.email === email && u.password === password); 
 
     if(!foundUser) {
@@ -52,6 +52,19 @@ export function AuthProvider({children}) {
     setLoading(false)
     return true;
   }
+  function updatedUser(newData) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const updatedUsers = users.map((u) =>
+      u.email === user.email ? {...u, ...newData} : u 
+  );
+  const updatedUser = {...user, ...newData};
+  
+  localStorage.setItem("users", JSON.stringify(updatedUsers));
+  localStorage.setItem("user", JSON.stringify(updatedUser)); 
+  setUser(updatedUser)
+  return true; 
+  }
 
   function logout() {
     localStorage.removeItem("user")
@@ -59,7 +72,7 @@ export function AuthProvider({children}) {
   }
 
   return (
-    <AuthContext.Provider value={{user, loading, error, signup, login, logout}}>
+    <AuthContext.Provider value={{user, loading, error, signup, login, updatedUser, logout}}>
       {children}
     </AuthContext.Provider>
   );

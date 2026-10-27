@@ -22,7 +22,7 @@ function MyApplicationPage() {
 
     function handledeleteApplication(applicationid) {
         setLoading(true)
-        deleteApplication(applicationid);
+        deleteApplication(applicationid); 
         setLoading(false)
     }
     function handlelogout() {
@@ -33,15 +33,15 @@ function MyApplicationPage() {
  return (
   <div className="min-h-screen w-full bg-slate-50">
     {/* Header */}
-    <header className=" sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
+    <header className="sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
-        <div className="text-lg font-semibold text-slate-900">JobBoard</div>
+        <div className="text-lg font-semibold text-slate-900">JobBoard</div> 
         <div className="flex gap-3">
           <button onClick={() => navigate("/home")}
             className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer">
             Home
           </button>
-          <button onClick={handlelogout}
+          <button onClick={handlelogout} 
             className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer">
             Logout
           </button>
