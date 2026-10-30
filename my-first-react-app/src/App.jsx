@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import JobDetailPage from "./pages/JobDetailPage";
 import MyApplicationPage from "./pages/MyApplicationPage"
 import ProfilePage from "./pages/ProfilePage"
+import PostJobPage from "./pages/PostJobPage"
  
 function App(){
   return (
@@ -21,7 +22,8 @@ function App(){
      <Route path="/home" element={<HomePage/>} />
      <Route path="/job/:id" element={<JobDetailPage />} />
      <Route path="/applications" element={<MyApplicationPage/>} />
-     <Route path="/Profile" element={<ProfilePage/>} />  
+     <Route path="/Profile" element={<ProfilePage/>} />
+     <Route path="/post-job" element={<PostJobPage />} /> 
      </Routes>
     </BrowserRouter>
     </JobsProvider>

@@ -14,7 +14,7 @@ export function AuthProvider({children}) {
     }
   },[]);
 
-  function signup(email, password, isEmployer, name) {
+  function signup(name, email, password, isEmployer) {
     setLoading(true);
     setError(null);
 
@@ -35,7 +35,7 @@ export function AuthProvider({children}) {
     return true;
   }
 
-  function login(email, password, ) {
+  function login( email, password) {
     setLoading(true)
     setError(null);
 
@@ -43,7 +43,7 @@ export function AuthProvider({children}) {
     const foundUser = users.find(u => u.email === email && u.password === password); 
 
     if(!foundUser) {
-      setError("invalid email or password");
+      setError("invalid email or password"); 
       setLoading(false)
       return false;
     }
