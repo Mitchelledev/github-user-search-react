@@ -10,7 +10,7 @@ function  HomePage() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All Levels");
-  const [filteredJobs, setfilteredJobs] = useState([]); 
+  const [filteredJobs, setfilteredJobs] = useState([]);
 
   useEffect(() => {
     if(!user) {
@@ -21,7 +21,7 @@ function  HomePage() {
   }, [user, navigate]); 
 
   useEffect(() => {
-    const results = searchjobs(searchQuery, selectedLevel)
+    const results = searchjobs(searchQuery, selectedLevel) 
     setfilteredJobs(results);
   }, [jobs, searchQuery, selectedLevel]); 
 
@@ -38,6 +38,8 @@ function  HomePage() {
     navigate("/");
   }
 
+  if (!user) return null;
+
   return (
     <div className="min-h-screen w-full bg-slate-50">
       {/* Header */}
@@ -45,6 +47,14 @@ function  HomePage() {
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="text-lg font-semibold text-slate-900">JobBoard</div>
           <div className="flex gap-3">
+             {user.isEmployer && ( 
+              <button
+              onClick={() => navigate("/post-job")}
+              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              >
+                post job 
+              </button> 
+            )} 
             <button
               onClick={() => navigate("/applications")}
               className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
@@ -126,4 +136,4 @@ function  HomePage() {
   );
 }
 
-export default HomePage; 
+export default HomePage;

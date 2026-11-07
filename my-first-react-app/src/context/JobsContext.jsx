@@ -1,26 +1,29 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const JobsContext = createContext();
 
 export function JobsProvider({children}) {
-  const [jobs, setJobs] = useState([]);
-  const [applications, setApplications] = useState([]); 
+  const [jobs, setJobs] = useState(() => {
+    const savedjobs = localStorage.getItem("jobs")
+    return savedjobs ? JSON.parse(savedjobs) : []; 
+  });
+  const [applications, setApplications] = useState([]);  
 
   function initializeJobs(){
-    const mockjobs = [
+    const mockjobs = [ 
       {
         id: 1,
         title: "Senior React Developer",
-        company: "Techorp.com",
+        company: "Techorp.com", 
         postedBy: "udohchineye30@gmail.com",
         level: "Mid",
         location: "Remote",
-        decription: "we're looking for an experienced React developer to join our growing team",
+        description: "we're looking for an experienced React developer to join our growing team",
         requirement: ["5+ years React", "TypeScript", "State Management"]
       },
       {
         id: 2,
-        title: " product Manager",
+        title: " Product Manager", 
         company: "Startup.com",
         postedBy: "udohchineye30@gmail.com",
         level: "Senior",
@@ -29,14 +32,18 @@ export function JobsProvider({children}) {
         requirement: ["8+ years pm expereince", "Technical background", "Leadership"] 
       },
     ];
-    setJobs(mockjobs);
+    setJobs((prev) => (prev.length > 0 ? prev : mockjobs)); 
   }
 
+  useEffect(() => {
+    localStorage.setItem("jobs", JSON.stringify(jobs));
+  }, [jobs]);
+
   function getJobs(){
-    return jobs;
+    return jobs; 
   }
   function getJobById(id) {
-    return jobs.find(job => job.id === id);
+    return jobs.find(job => job.id === id); 
   }
   function searchjobs(query, level) {
     return jobs.filter(job => {

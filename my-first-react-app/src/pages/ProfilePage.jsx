@@ -18,7 +18,7 @@ function ProfilePage() {
     companyName: "",
     companyDescription: "",
     skillsRequired: "",
-    experienceRequired: "",
+    experienceRequired: "", 
   });
   const [snapshort, setsnapshort] = useState(null); 
 
@@ -47,7 +47,7 @@ function ProfilePage() {
   function handleSave() {
     const success = updatedUser(formData);
     if (success) {
-      setIsEditing(true); 
+      setIsEditing(true);
     }
   }
   function handleEdit() {
@@ -73,17 +73,27 @@ function ProfilePage() {
       <div className="border-b border-slate-200 pb-4">
         <p className="text-sm text-slate-600 mb-1">{label}</p> 
         {isEditing ? (
+          name === "bio" ? (
+            <textarea
+            name={name}
+            value={formData[name]}
+            onChange={handleChange}
+            rows={4} 
+            className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+            />
+          ) : (
           <input
             name={name}
             value={formData[name]}
             onChange={handleChange}
             className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
           />
-        ) : (
-          <p className="text-base text-slate-900">{formData[name] || "—"}</p>
+          )
+        ) : ( 
+          <p className="text-base text-slate-900 whitespace-pre-line">{formData[name] || "—"}</p> 
         )}
       </div>
-    );
+    ); 
   }
 
   return (
@@ -92,6 +102,14 @@ function ProfilePage() {
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="text-lg font-semibold text-slate-900">JobBoard</div>
           <div className="flex gap-3">
+            {user.isEmployer && (
+              <button
+              onClick={() => navigate("/post-job")}
+              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              >
+                post job
+              </button> 
+            )}
             <button
               onClick={() => navigate("/home")}
               className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"

@@ -1,22 +1,22 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-
-function SignInPage() {
+ 
+function SignInPage() { 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); 
 
   const navigate = useNavigate();
   const { login, loading, error } = useContext(AuthContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const success = login(email, password);
-    if (success) {
-      navigate("/home");
+    const loggedInUser = login(email, password);
+    if (loggedInUser) {
+      navigate(loggedInUser.isEmployer ? "/post-job" : "/home"); 
     }
-  }
+  } 
 
   return (
     <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center px-6">
@@ -101,4 +101,4 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default SignInPage; 

@@ -3,20 +3,23 @@ import { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext()
 
 export function AuthProvider({children}) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("user")
+    return saved ? JSON.parse(saved) : null; 
+  }); 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const saveduser = localStorage.getItem("user");
     if(saveduser) {
-      setUser(JSON.parse(saveduser));
+      setUser(JSON.parse(saveduser));  
     }
-  },[]);
+  },[]); 
 
   function signup(name, email, password, isEmployer) {
     setLoading(true);
-    setError(null);
+    setError(null); 
 
    const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -32,7 +35,7 @@ export function AuthProvider({children}) {
 
     setUser(newUser)
     setLoading(false)
-    return true;
+    return true; 
   }
 
   function login( email, password) {
@@ -43,15 +46,16 @@ export function AuthProvider({children}) {
     const foundUser = users.find(u => u.email === email && u.password === password); 
 
     if(!foundUser) {
-      setError("invalid email or password"); 
+      setError("Invalid Email or Password"); 
       setLoading(false)
-      return false;
+      return null;
     }
     localStorage.setItem("user", JSON.stringify(foundUser));
     setUser(foundUser)
     setLoading(false)
-    return true;
+    return foundUser; 
   }
+
   function updatedUser(newData) {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 

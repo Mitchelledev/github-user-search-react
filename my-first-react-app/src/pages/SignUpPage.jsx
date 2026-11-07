@@ -6,7 +6,7 @@ function SignUpPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmployer, setIsEmployer] = useState(false);
+  const [isEmployer, setisEmployer] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const { signup, loading, error } = useContext(AuthContext);
@@ -98,7 +98,7 @@ function SignUpPage() {
                 type="checkbox"
                 id="employer"
                 checked={isEmployer}
-                onChange={(e) => setIsEmployer(e.target.checked)}
+                onChange={(e) => setisEmployer(e.target.checked)}
                 className="w-4 h-4 cursor-pointer"
               />
               <label htmlFor="employer" className="text-sm text-slate-900 cursor-pointer">

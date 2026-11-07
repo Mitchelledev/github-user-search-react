@@ -16,7 +16,11 @@ import { AuthContext } from "../context/AuthContext";
     navigate("/signin");
   }
   function handlePostJob(){
-    navigate("/signin");
+    if(!user) {
+      navigate("/signin");
+      return;
+    }
+    navigate("/post-job"); 
   }
 
   return (
@@ -61,7 +65,7 @@ import { AuthContext } from "../context/AuthContext";
             onClick={handlePostJob}
             className="px-6 py-3 border border-slate-300 text-slate-900 rounded-lg mt-4 hover:bg-slate-100 font-medium cursor-pointer"
           >
-            Post a Job
+            Post a Job 
           </button>
         </div>
       </div>

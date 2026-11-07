@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { JobsContext } from "../context/JobsContext";
+import { JobsContext } from "../context/JobsContext"; 
 
 function JobDetailPage() {
   const { id } = useParams();
@@ -9,19 +9,15 @@ function JobDetailPage() {
   const { getJobById, applyToJob } = useContext(JobsContext);
   const navigate = useNavigate();
 
-  const [job, setjob] = useState(null)
   const [loading, setLoading] = useState(false);
   const [applied, setApplied] = useState(false);
 
   useEffect(() => {
-    if (!user) {
+    if (!user) 
       navigate("/"); 
-      return; 
-    } 
+    }, [user, navigate]);
 
-    const foundJob = getJobById(parseInt(id));
-    setjob(foundJob);
-    }, [id, user, navigate]);
+  const job = getJobById(parseInt(id)); 
 
   function handleApply() {
     setLoading(true);
@@ -30,12 +26,14 @@ function JobDetailPage() {
       setApplied(true);
     }
     setLoading(false); 
-  } 
+  }
 
    if (!job) {
-     return <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center">
+     return (
+      <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center">
       <p className="text-slate-600">No job found.</p> 
      </div> 
+     );
    }
 
   return (

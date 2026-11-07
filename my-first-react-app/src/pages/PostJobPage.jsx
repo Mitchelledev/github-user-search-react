@@ -14,7 +14,7 @@ function PostJobPage() {
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [requirements, setRequirements] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); 
 
   useEffect(() => {
     if (!user) {
@@ -22,12 +22,13 @@ function PostJobPage() {
       return;
     }
     if (!user.isEmployer) {
-      navigate("/home");
+      navigate("/home"); 
     }
-  }, [user, navigate]);
-
-  // Guard goes after all hooks, before anything that reads user
+  }, [user, navigate]); 
+ 
   if (!user || !user.isEmployer) return null;
+
+  
 
   function handleSubmit() {
     if (!title.trim() || !description.trim()) {
@@ -56,7 +57,7 @@ function PostJobPage() {
     navigate("/");
   }
 
-  const inputClass =
+  const inputClass = 
     "w-full border border-slate-300 rounded-lg px-3 py-2 text-sm";
 
   return (
@@ -81,13 +82,13 @@ function PostJobPage() {
         </div>
       </header>
 
-      <div className="max-w-3xl mx-auto px-6 py-6">
+      <div className="max-w-3xl mx-auto px-6 py-6"> 
         <div className="mb-6">
           <h1 className="text-3xl font-semibold text-slate-900 mb-2">Post a job</h1>
-          <p className="text-slate-600 text-sm">Fill in the details seekers will see.</p>
+          <p className="text-slate-600 text-sm">Fill in the details job seekers will see.</p>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-lg p-6 flex flex-col gap-4">
+        <div className="bg-white border border-slate-200 rounded-lg p-6 flex flex-col gap-4"> 
           <div>
             <p className="text-sm text-slate-600 mb-1">Job title</p>
             <input className={inputClass} value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -129,10 +130,10 @@ function PostJobPage() {
 
           {error && <p className="text-sm text-red-600">{error}</p>}
 
-          <div>
+          <div> 
             <button
               onClick={handleSubmit}
-              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 bg-blue-600 text-sm border border-slate-300 rounded-lg hover:bg-blue-700 cursor-pointer"
             >
               Post job
             </button>
@@ -143,4 +144,4 @@ function PostJobPage() {
   );
 }
 
-export default PostJobPage;
+export default PostJobPage; 
