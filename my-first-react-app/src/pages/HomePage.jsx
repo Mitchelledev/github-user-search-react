@@ -41,20 +41,28 @@ function  HomePage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen w-full bg-slate-50">
+    <div className="min-h-screen w-full bg-[#0B132B]"> 
       {/* Header */}
       <header className=" sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between max-w-7xl mx-auto">
           <div className="text-lg font-semibold text-slate-900">JobBoard</div>
           <div className="flex gap-3">
              {user.isEmployer && ( 
+              <>
               <button
               onClick={() => navigate("/post-job")}
               className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
               >
                 post job 
-              </button> 
-            )} 
+              </button>
+              <button
+              onClick={() => navigate("/manage-jobs")} 
+              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer" 
+              >
+                Manage jobs 
+              </button>
+              </> 
+            )}
             <button
               onClick={() => navigate("/applications")}
               className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
@@ -69,7 +77,7 @@ function  HomePage() {
             </button>
             <button
               onClick={handlelogout}
-              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 text-sm text-white bg-indigo-600 border border-slate-300 rounded-lg hover:bg-indigo-700 cursor-pointer"
             >
               Logout
             </button>
@@ -83,7 +91,7 @@ function  HomePage() {
         <div className="flex gap-3 mb-6">
           <input
             type="text"
-            placeholder="Search jobs by title"
+            placeholder="Search jobs by title" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -101,29 +109,29 @@ function  HomePage() {
           </select>
           <button
             onClick={handleSearch}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 cursor-pointer text-sm"
+            className="px-6 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 cursor-pointer text-sm"
           >
             Search
           </button>
         </div>
 
         {/* Job Cards */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-8"> 
           {filteredJobs.length === 0 ? (
             <p className="text-center text-slate-600 py-8">No jobs found</p> 
           ) : (
             filteredJobs.map((job) => (
               <div
                 key={job.id} 
-                className="bg-white border border-slate-200 rounded-lg p-4 hover:border-slate-300 cursor-pointer"
+                className="bg-blue-100 border border-slate-700 rounded-lg p-4 hover:border-slate-300 cursor-pointer"
               >
                 <div className="font-medium text-slate-900 mb-1">{job.title}</div>
                 <div className="text-sm text-slate-600 mb-3">
                   {job.company} • {job.level} • {job.location}
                 </div>
-                <button
-                  onClick={() => handleViewDetails(job.id)}
-                  className="px-3 py-1 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 cursor-pointer"
+                <button 
+                  onClick={() => handleViewDetails(job.id)} 
+                  className="px-3 py-1 bg-indigo-600 text-white rounded text-sm font-medium hover:bg-indigo-700 cursor-pointer"
                 >
                   View Details
                 </button>

@@ -15,7 +15,7 @@ export function JobsProvider({children}) {
         id: 1,
         title: "Senior React Developer",
         company: "Techorp.com", 
-        postedBy: "udohchineye30@gmail.com",
+        postedBy: "Bechmen3@gmail.com",
         level: "Mid",
         location: "Remote",
         description: "we're looking for an experienced React developer to join our growing team",
@@ -25,7 +25,7 @@ export function JobsProvider({children}) {
         id: 2,
         title: " Product Manager", 
         company: "Startup.com",
-        postedBy: "udohchineye30@gmail.com",
+        postedBy: "udohmichelle5@gmail.com",
         level: "Senior",
         location: "San francisco",
         description: "lead product strategy for our AI platform.",
@@ -36,7 +36,7 @@ export function JobsProvider({children}) {
   }
 
   useEffect(() => {
-    localStorage.setItem("jobs", JSON.stringify(jobs));
+    localStorage.setItem("jobs", JSON.stringify(jobs)); 
   }, [jobs]);
 
   function getJobs(){
@@ -78,14 +78,17 @@ export function JobsProvider({children}) {
     return true; 
   } 
   function deleteApplication(applicationid) {
-    const updateApplications = applications.filter(app => app.id !== applicationid)
+    const updateApplications = applications.filter(app => app.id !== applicationid);
     setApplications(updateApplications); 
     return true; 
   }
-  
+  function deletejob(jobid, userEmail) {
+    setJobs((prev) => prev.filter((job) => !(job.id === jobid && job.postedBy === userEmail)));  
+  }
+
   return(
     <JobsContext.Provider value={{
-       jobs, 
+       jobs,
       applications, 
       initializeJobs, 
       getJobs, 
@@ -94,7 +97,8 @@ export function JobsProvider({children}) {
       applyToJob, 
       getUserApplication, 
       postJobs, 
-      deleteApplication 
+      deleteApplication, 
+      deletejob
     }}>
       {children}
     </JobsContext.Provider>

@@ -9,6 +9,7 @@ import JobDetailPage from "./pages/JobDetailPage";
 import MyApplicationPage from "./pages/MyApplicationPage"
 import ProfilePage from "./pages/ProfilePage"
 import PostJobPage from "./pages/PostJobPage"
+import ManagejobsPage from "./pages/ManagejobsPage";
  
 function App(){
   return (
@@ -24,6 +25,7 @@ function App(){
      <Route path="/applications" element={<MyApplicationPage/>} />
      <Route path="/Profile" element={<ProfilePage/>} />
      <Route path="/post-job" element={<PostJobPage />} /> 
+     <Route path="/manage-jobs" element={<ManagejobsPage />} /> 
      </Routes>
     </BrowserRouter>
     </JobsProvider>

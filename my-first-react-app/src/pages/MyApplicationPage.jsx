@@ -31,7 +31,7 @@ function MyApplicationPage() {
     }
 
  return (
-  <div className="min-h-screen w-full bg-slate-50">
+  <div className="min-h-screen w-full bg-[#0B132B]">
     {/* Header */}
     <header className="sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -42,7 +42,7 @@ function MyApplicationPage() {
             Home
           </button>
           <button onClick={handlelogout} 
-            className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer">
+            className="px-4 py-2 text-sm text-white border border-slate-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 cursor-pointer">
             Logout
           </button>
         </div>
@@ -52,14 +52,14 @@ function MyApplicationPage() {
     {/* Title */}
     <div className="max-w-7xl mx-auto px-6 py-6">
       <div className="mb-6">
-        <h1 className="text-3xl font-semibold text-slate-900 mb-2">My Applications</h1>
-        <p className="text-slate-600">Applied jobs</p> 
+        <h1 className="text-3xl font-semibold text-amber-200 mb-2">My Applications</h1>
+        <p className="text-slate">Applied jobs</p> 
       </div>
 
       {/* Job Cards */}
       <div className="flex flex-col gap-3">
         {applications.length === 0 ? (
-          <p className="text-center text-slate-600 font-bold py-8">No applied jobs found</p>
+          <p className="text-center text-white font-bold py-8">No applied jobs found</p>
         ) : (
           applications.map((app) => (
             <div key={app.id} 

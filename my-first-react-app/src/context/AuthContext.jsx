@@ -1,13 +1,13 @@
 import { createContext, useState, useEffect } from "react";
 
-export const AuthContext = createContext()
+export const AuthContext = createContext() 
 
 export function AuthProvider({children}) {
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("user")
     return saved ? JSON.parse(saved) : null; 
   }); 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(null); 
 
   useEffect(() => {
@@ -55,9 +55,9 @@ export function AuthProvider({children}) {
     setLoading(false)
     return foundUser; 
   }
-
+  
   function updatedUser(newData) {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const users = JSON.parse(localStorage.getItem("users")) || []; 
 
     const updatedUsers = users.map((u) =>
       u.email === user.email ? {...u, ...newData} : u 
@@ -65,20 +65,20 @@ export function AuthProvider({children}) {
   const updatedUser = {...user, ...newData};
   
   localStorage.setItem("users", JSON.stringify(updatedUsers));
-  localStorage.setItem("user", JSON.stringify(updatedUser)); 
+  localStorage.setItem("user", JSON.stringify(updatedUser));
   setUser(updatedUser)
   return true; 
   }
 
   function logout() {
     localStorage.removeItem("user")
-    setUser(null);
+    setUser(null); 
   }
 
   return (
     <AuthContext.Provider value={{user, loading, error, signup, login, updatedUser, logout}}>
       {children}
-    </AuthContext.Provider>
+    </AuthContext.Provider> 
   );
 }
-export default AuthContext; 
+export default AuthContext;

@@ -5,7 +5,7 @@ import JobsContext from "../context/JobsContext";
 
 function ProfilePage() {
   const { user, logout, updatedUser } = useContext(AuthContext);
-  const {getUserApplication} = useContext(JobsContext);
+  const {getUserApplication, jobs} = useContext(JobsContext);
   const navigate = useNavigate(); 
 
   const [isEditing, setIsEditing] = useState(false);
@@ -38,7 +38,7 @@ function ProfilePage() {
       skillsRequired: user.skillsRequired ?? "",
       experienceRequired: user.experienceRequired ?? "",
     });
-  }, [user, navigate]);
+  }, [user, navigate]); 
 
   function handleChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -67,6 +67,7 @@ function ProfilePage() {
   if (!user) return null; 
 
   const appliedCount = getUserApplication(user.email).length; 
+  const postedCount = jobs.filter((job) => job.postedBy === user.email).length
 
   function renderField(label, name) {
     return (
@@ -97,18 +98,26 @@ function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-slate-50">
+    <div className="min-h-screen w-full bg-[#0B132B]"> 
       <header className="sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="text-lg font-semibold text-slate-900">JobBoard</div>
           <div className="flex gap-3">
             {user.isEmployer && (
+              <>
               <button
               onClick={() => navigate("/post-job")}
               className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
               >
                 post job
-              </button> 
+              </button>
+              <button
+              onClick={() => navigate("/manage-jobs")}
+              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer" 
+              >
+                Manage jobs
+              </button>
+              </> 
             )}
             <button
               onClick={() => navigate("/home")}
@@ -118,7 +127,7 @@ function ProfilePage() {
             </button>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 text-sm text-white border border-slate-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 cursor-pointer"
             >
               Logout
             </button>
@@ -128,7 +137,7 @@ function ProfilePage() {
 
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-semibold text-slate-900">Your Profile</h1>
+          <h1 className="text-3xl font-semibold text-amber-200"> Profile</h1>
           {isEditing ? (
             <div className="flex gap-3">
               <button
@@ -147,14 +156,14 @@ function ProfilePage() {
           ) : (
             <button
               onClick={handleEdit}
-              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 text-sm text-white border border-slate-800 rounded-lg hover:bg-slate-600 cursor-pointer"
             >
               Edit
             </button>
           )}
         </div> 
 
-        <div className="bg-white border border-slate-200 rounded-lg p-6 flex flex-col gap-4">
+        <div className="bg-blue-100 border border-slate-200 rounded-lg p-6 flex flex-col gap-4">
           {!user.isEmployer && (
             <>
               {renderField("Name", "name")}
@@ -175,6 +184,10 @@ function ProfilePage() {
               {renderField("Company description", "companyDescription")}
               {renderField("Skills required", "skillsRequired")}
               {renderField("Experience required", "experienceRequired")}
+              <div className="border-b border-slate-200 pb-4">
+                <p className="text-sm text-slate-600 mb-1">job posted</p>
+                <p className="text-base font font-medium text-slate-900">{postedCount}</p>
+              </div>
             </>
           )}
 

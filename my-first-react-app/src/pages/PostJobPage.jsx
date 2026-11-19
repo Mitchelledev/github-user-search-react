@@ -29,7 +29,6 @@ function PostJobPage() {
   if (!user || !user.isEmployer) return null;
 
   
-
   function handleSubmit() {
     if (!title.trim() || !description.trim()) {
       setError("Title and description are required.");
@@ -45,12 +44,12 @@ function PostJobPage() {
       requirement: requirements
         .split(",")
         .map((req) => req.trim())
-        .filter((req) => req !== ""),
+        .filter((req) => req !== ""), 
     };
 
     postJobs(jobData, user.email);
-    navigate("/profile");
-  }
+    navigate("/manage-jobs");
+  } 
 
   function handleLogout() {
     logout();
@@ -61,7 +60,7 @@ function PostJobPage() {
     "w-full border border-slate-300 rounded-lg px-3 py-2 text-sm";
 
   return (
-    <div className="min-h-screen w-full bg-slate-50">
+    <div className="min-h-screen w-full bg-[#FAF7F2]">
       <header className="sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="text-lg font-semibold text-slate-900">JobBoard</div>
@@ -74,7 +73,7 @@ function PostJobPage() {
             </button>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+              className="px-4 py-2 text-sm text-white border border-slate-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 cursor-pointer"
             >
               Logout
             </button>
@@ -133,10 +132,10 @@ function PostJobPage() {
           <div> 
             <button
               onClick={handleSubmit}
-              className="px-4 py-2 bg-blue-600 text-sm border border-slate-300 rounded-lg hover:bg-blue-700 cursor-pointer"
+              className="px-4 py-2 bg-indigo-600 text-sm text-white border border-slate-300 rounded-lg hover:bg-indigo-700 cursor-pointer"
             >
               Post job
-            </button>
+            </button> 
           </div>
         </div>
       </div>

@@ -30,14 +30,14 @@ function JobDetailPage() {
 
    if (!job) {
      return (
-      <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen w-full flex items-center justify-center">
       <p className="text-slate-600">No job found.</p> 
      </div> 
      );
    }
 
   return (
-  <div className="min-h-screen w-full bg-slate-50">
+  <div className="min-h-screen w-full bg-[#0B132B]">
     {/* Header with navigation */}
     <header className=" sticky top-0 z-10 border-b border-slate-200 bg-white px-6 py-4">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -51,7 +51,7 @@ function JobDetailPage() {
           </button>
           <button
             onClick={() => navigate("/home")}
-            className="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 cursor-pointer"
+            className="px-4 py-2 text-sm text-white border border-slate-300 bg-indigo-600 rounded-lg hover:bg-indigo-700 cursor-pointer"
           >
             Back
           </button>
@@ -63,20 +63,20 @@ function JobDetailPage() {
     <div className="max-w-7xl mx-auto px-6 py-6">
       {/* Job Title Section */}
       <div className="mb-6">
-        <h1 className="text-3xl font-semibold text-slate-900 mb-2">{job.title}</h1>
-        <p className="text-slate-600 text-sm">
+        <h1 className="text-3xl text-white font-semibold text-slate-900 mb-2">{job.title}</h1> 
+        <p className="text-slate-400 text-sm">
           {job.company} • {job.level} • {job.location} 
         </p>
       </div>
 
       {/* About Section */}
-      <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6">
+      <div className="bg-blue-100 border border-slate-200 rounded-lg p-6 mb-6">
         <h2 className="text-lg font-semibold text-slate-900 mb-3">About this role</h2>
-        <p className="text-slate-700">{job.description}</p>
+        <p className="text-slate-700">{job.description}</p> 
       </div>
 
       {/* Requirements Section */}
-      <div className="bg-white border border-slate-200 rounded-lg p-6 mb-6">
+      <div className="bg-blue-100 border border-slate-200 rounded-lg p-6 mb-6">
         <h2 className="text-lg font-semibold text-slate-900 mb-3">Requirements</h2>
         <ul className="list-disc list-inside space-y-2">
           {job.requirement.map((req, index) => (
@@ -90,7 +90,7 @@ function JobDetailPage() {
         <button
           onClick={handleApply}
           disabled={loading}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 mt-3 disabled:bg-blue-400 cursor-pointer"
+          className="px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 mt-3 disabled:bg-blue-400 cursor-pointer"
         >
           {loading ? "Applying..." : "Apply Now"}
         </button>

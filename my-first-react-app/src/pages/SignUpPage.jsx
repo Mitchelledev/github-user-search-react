@@ -18,10 +18,10 @@ function SignUpPage() {
     if (success) {
       navigate("/home");
     }
-  }
+  } 
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 flex items-center justify-center px-6">
+    <div className="min-h-screen w-full bg-[#0B132B] flex items-center justify-center px-6">
       <div className="bg-white rounded-lg border border-slate-200 p-8 w-full max-w-sm">
         {/* Header */}
         <h2 className="text-2xl font-semibold text-slate-900 mb-2">Create account</h2>
@@ -111,9 +111,9 @@ function SignUpPage() {
 
             {/* Submit Button */}
             <button
-              type="submit"
+              type="submit" 
               disabled={loading}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:bg-blue-400 cursor-pointer"
+              className="w-full px-4 py-2 bg-indigo-700 text-white rounded-lg font-medium hover:bg-indigo-600 disabled:bg-blue-600 cursor-pointer"
             >
               {loading ? "Creating account..." : "Sign Up"}
             </button>
